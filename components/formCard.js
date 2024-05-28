@@ -2,14 +2,16 @@
 
 import { Card, CardHeader } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { useState, useEffect } from "react";
+import { useState, useRef } from "react";
 
 export default function FormCard({ setTasks }) {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
 
-  const submit = () => {
-    fetch(
+  const formRef = useRef();
+
+  const submit = async () => {
+    await fetch(
       "api/add?" +
         new URLSearchParams({
           title: title,
@@ -21,7 +23,7 @@ export default function FormCard({ setTasks }) {
       .then((res) => res.json())
       .then((data) => {
         setTasks(data);
-        console.log(data);
+        formRef.current.reset();
       });
   };
 
@@ -37,7 +39,7 @@ export default function FormCard({ setTasks }) {
 
   return (
     <div className="m-4">
-      <form action={submit}>
+      <form action={submit} ref={formRef}>
         <Card className={cn("w-[380px]")}>
           <CardHeader>
             <textarea required style={{ resize: "none" }} className="rounded-md text-xl  border p-1" cols={1} placeholder="Title your task..." onChange={handleTitleChange} />

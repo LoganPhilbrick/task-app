@@ -9,13 +9,14 @@ export default function Home() {
   const [tasks, setTasks] = useState(null);
 
   useEffect(() => {
-    fetch("api/get")
-      .then((res) => res.json())
-      .then((data) => {
-        setTasks(data);
-        console.log(data);
-      });
-  }, []);
+    if (tasks === null) {
+      fetch("api/get")
+        .then((res) => res.json())
+        .then((data) => {
+          setTasks(data);
+        });
+    }
+  }, [tasks]);
 
   if (!tasks) {
     return <div>Loading...</div>;
