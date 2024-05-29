@@ -4,24 +4,19 @@ import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/ca
 import { Button } from "./ui/button";
 import { Trash2 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
 
 export default function MappedCards({ tasks, setTasks }) {
   const deleteTask = async (id) => {
     if (id) {
-      await fetch(
+      const res = await fetch(
         "api/delete?" +
           new URLSearchParams({
             id: id,
           })
-      ).then((res) => res.json());
-
-      fetch("api/get")
-        .then((res) => res.json())
-        .then((data) => {
-          setTasks(data);
-          console.log(data);
-        });
+      );
+      const updatedTasks = await res.json();
+      setTasks(updatedTasks);
+      // console.log(updatedTasks);
     }
   };
 

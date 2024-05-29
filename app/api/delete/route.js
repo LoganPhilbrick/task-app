@@ -14,5 +14,5 @@ export async function GET(request) {
   }
 
   const tasks = await sql`SELECT * FROM tasks;`;
-  return NextResponse.json({ tasks }, { status: 200 });
+  return NextResponse.json(tasks.rows, { status: 200 });
 }

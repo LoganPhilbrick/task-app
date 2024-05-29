@@ -25,7 +25,7 @@ export default function Home() {
     <main>
       <FormCard setTasks={setTasks} />
       <MappedCards tasks={tasks} setTasks={setTasks} />
-      <ModeToggle />
+      {/* <ModeToggle /> */}
     </main>
   );
 }

@@ -11,20 +11,17 @@ export default function FormCard({ setTasks }) {
   const formRef = useRef();
 
   const submit = async () => {
-    await fetch(
+    const res = await fetch(
       "api/add?" +
         new URLSearchParams({
           title: title,
           text: text,
         })
-    ).then((res) => res.json());
-
-    fetch("api/get")
-      .then((res) => res.json())
-      .then((data) => {
-        setTasks(data);
-        formRef.current.reset();
-      });
+    );
+    const updatedTasks = await res.json();
+    setTasks(updatedTasks);
+    formRef.current.reset();
+    // console.log(updatedTasks);
   };
 
   const handleTitleChange = (event) => {
