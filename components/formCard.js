@@ -11,11 +11,17 @@ export default function FormCard({ setTasks }) {
   const formRef = useRef();
 
   const submit = async () => {
+    const date = new Date().toLocaleDateString();
+    const time = new Date().toLocaleTimeString();
+
+    console.log(time, date);
     const res = await fetch(
       "api/add?" +
         new URLSearchParams({
           title: title,
           text: text,
+          date: date,
+          time: time,
         })
     );
     const updatedTasks = await res.json();

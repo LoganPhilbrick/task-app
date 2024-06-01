@@ -9,12 +9,14 @@ export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const title = searchParams.get("title");
   const text = searchParams.get("text");
+  const date = searchParams.get("date");
+  const time = searchParams.get("time");
   const id = uuidv4();
   const { userId } = auth();
 
   try {
     if (!title || !text) throw new Error("Title and description required");
-    await sql`INSERT INTO tasks (title, text, id, userid) VALUES ( ${title}, ${text}, ${id}, ${userId});`;
+    await sql`INSERT INTO tasks (title, text, id, userid, date, time) VALUES ( ${title}, ${text}, ${id}, ${userId}, ${date}, ${time});`;
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });
   }
