@@ -2,7 +2,6 @@
 
 import MappedCards from "@/components/mappedCards";
 import FormCard from "@/components/formCard";
-import { ModeToggle } from "@/components/modeToggle";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -25,7 +24,6 @@ export default function Home() {
     <main>
       <FormCard setTasks={setTasks} />
       <MappedCards tasks={tasks} setTasks={setTasks} />
-      {/* <ModeToggle /> */}
     </main>
   );
 }
