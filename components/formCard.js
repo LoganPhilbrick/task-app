@@ -14,7 +14,6 @@ export default function FormCard({ setTasks }) {
     const date = new Date().toLocaleDateString();
     const time = new Date().toLocaleTimeString();
 
-    console.log(time, date);
     const res = await fetch(
       "api/add?" +
         new URLSearchParams({
