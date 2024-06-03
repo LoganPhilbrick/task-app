@@ -31,7 +31,7 @@ export default function MappedCards({ tasks, setTasks, done }) {
             <Card className="group">
               <CardHeader className="flex flex-row">
                 <div className="w-5/6">
-                  <CardTitle>{task.title}</CardTitle>
+                  <CardTitle className="pb-1">{task.title}</CardTitle>
                   <CardDescription className="text-gray-700 mt-1 break-words">{task.text}</CardDescription>
                   <CardDescription className="text-gray-400 mt-5">
                     created {task.date} {task.time}
@@ -54,7 +54,7 @@ export default function MappedCards({ tasks, setTasks, done }) {
               <CardHeader className="flex flex-row">
                 {/* ^^ style={{ filter: "blur(1px)" }} ^^ */}
                 <div className="w-5/6">
-                  <CardTitle className="truncate">{task.title}</CardTitle>
+                  <CardTitle className="truncate pb-1">{task.title}</CardTitle>
                   <CardDescription className="text-gray-700 mt-1 truncate">{task.text}</CardDescription>
                   <CardDescription className="text-gray-400 mt-5">
                     created {task.date} {task.time}
