@@ -56,20 +56,21 @@ export default function MappedCards({ notDone, setNotDone, done, setDone }) {
     return <div>Loading...</div>;
   }
   return (
-    <div className="flex">
-      <div className="">
+    <div className="flex flex-col md:flex-row">
+      <div>
         <div className="flex justify-center w-96 mx-4">
           <h2 className="font-bold text-lg">Tasks</h2>
         </div>
         {notDone.map((task, id) => (
-          <div key={id} className="w-96 m-4">
-            <Card className="group">
+          <div key={id} className="w-96 m-4 flex justify-center">
+            <Card className="group w-[340px] sm:w-[380px]">
               <CardHeader className="flex flex-row">
                 <div className="w-5/6">
                   <CardTitle className="pb-1">{task.title}</CardTitle>
                   <CardDescription className="mt-1 break-words">{task.text}</CardDescription>
                   <CardDescription className="text-gray-400 mt-5">
-                    created {task.date} {task.time}
+                    created {task.date}
+                    {task.time}
                   </CardDescription>
                 </div>
                 <div className="ml-auto flex flex-col justify-between invisible group-hover:visible">
@@ -90,8 +91,8 @@ export default function MappedCards({ notDone, setNotDone, done, setDone }) {
           <h2 className="font-bold text-lg">Complete</h2>
         </div>
         {done.map((task, id) => (
-          <div key={id} className="m-4 w-96">
-            <Card className="group bg-green-300">
+          <div key={id} className="w-96 m-4 flex justify-center">
+            <Card className="group bg-green-300 w-[340px] sm:w-[380px]">
               <CardHeader className="flex flex-row">
                 <div className="w-5/6">
                   <CardTitle className="truncate pb-1">{task.title}</CardTitle>

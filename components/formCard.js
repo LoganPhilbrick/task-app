@@ -42,7 +42,7 @@ export default function FormCard({ setNotDone }) {
   return (
     <div className="m-4 flex justify-center">
       <form action={submit} ref={formRef}>
-        <Card className={cn("w-[380px]")}>
+        <Card className="w-[340px] sm:w-[380px]">
           <CardHeader>
             <textarea required style={{ resize: "none" }} className="rounded-md text-xl  border p-1" cols={1} placeholder="Title your task..." onChange={handleTitleChange} />
             <textarea required style={{ resize: "none" }} className="rounded-md  border p-1" cols={1} placeholder="Task details..." onChange={handleTextChange} />
