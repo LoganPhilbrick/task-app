@@ -32,7 +32,7 @@ export default function Home() {
     return <div>Loading...</div>;
   }
   return (
-    <main className="flex flex-col items-center">
+    <main className="flex flex-col items-center ">
       <div>
         <FormCard setNotDone={setNotDone} setDone={setDone} />
         <MappedCards notDone={notDone} setNotDone={setNotDone} done={done} setDone={setDone} />

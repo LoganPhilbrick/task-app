@@ -30,6 +30,23 @@ export default function MappedCards({ notDone, setNotDone, done, setDone }) {
     }
   };
 
+  const completeTask = async (id) => {
+    if (id) {
+      const res = await fetch(
+        "api/complete?" +
+          new URLSearchParams({
+            id: id,
+          })
+      );
+      const data = await res.json();
+
+      const done = data.filter(returnDone);
+      setDone(done);
+      const notDone = data.filter(returnNotDone);
+      setNotDone(notDone);
+    }
+  };
+
   if (!notDone) {
     return <div>Loading...</div>;
   }
@@ -50,9 +67,12 @@ export default function MappedCards({ notDone, setNotDone, done, setDone }) {
                     created {task.date} {task.time}
                   </CardDescription>
                 </div>
-                <div className="ml-auto flex flex-col justify-center invisible group-hover:visible">
+                <div className="ml-auto flex flex-col justify-between invisible group-hover:visible">
                   <Button variant="outline" size="icon" onClick={() => deleteTask(task.id)}>
                     <Trash2 className="h-[1.2rem] w-[1.2rem]" />
+                  </Button>
+                  <Button variant="outline" size="icon" onClick={() => completeTask(task.id)}>
+                    <CircleCheckBig className="h-[1.2rem] w-[1.2rem]" />
                   </Button>
                 </div>
               </CardHeader>
@@ -75,6 +95,11 @@ export default function MappedCards({ notDone, setNotDone, done, setDone }) {
                   <CardDescription className="text-gray-400 mt-5">
                     created {task.date} {task.time}
                   </CardDescription>
+                </div>
+                <div className="ml-auto flex flex-col justify-center invisible group-hover:visible">
+                  <Button variant="outline" size="icon" onClick={() => deleteTask(task.id)}>
+                    <Trash2 className="h-[1.2rem] w-[1.2rem]" />
+                  </Button>
                 </div>
               </CardHeader>
             </Card>
