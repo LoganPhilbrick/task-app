@@ -28,8 +28,10 @@ export default function Home() {
     }
   }, [notDone]);
 
-  if (!notDone) {
-    return <div>Loading...</div>;
+  if (!done || !notDone) {
+    <div className="flex justify-center items-center">
+      <div>Loading...</div>
+    </div>;
   }
   return (
     <main className="flex flex-col items-center ">

@@ -52,8 +52,12 @@ export default function MappedCards({ notDone, setNotDone, done, setDone }) {
     }
   };
 
-  if (!notDone) {
-    return <div>Loading...</div>;
+  if (!done || !notDone) {
+    return (
+      <div className="flex justify-center items-center">
+        <div>Loading...</div>
+      </div>
+    );
   }
   return (
     <div className="flex flex-col md:flex-row">
@@ -65,7 +69,7 @@ export default function MappedCards({ notDone, setNotDone, done, setDone }) {
           <div key={id} className="w-96 m-4 flex justify-center group relative">
             <Card className=" w-[340px] sm:w-[380px] group-hover:blur-sm">
               <CardHeader className="flex flex-row">
-                <div className="w-4/6">
+                <div className="w-full">
                   <CardTitle className="pb-1">{task.title}</CardTitle>
                   <CardDescription className="mt-1 break-words">{task.text}</CardDescription>
                   <CardDescription className="text-gray-400 mt-5">
