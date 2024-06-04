@@ -62,10 +62,10 @@ export default function MappedCards({ notDone, setNotDone, done, setDone }) {
           <h2 className="font-bold text-lg">Tasks</h2>
         </div>
         {notDone.map((task, id) => (
-          <div key={id} className="w-96 m-4 flex justify-center">
-            <Card className="group w-[340px] sm:w-[380px]">
+          <div key={id} className="w-96 m-4 flex justify-center group relative">
+            <Card className=" w-[340px] sm:w-[380px] group-hover:blur-sm">
               <CardHeader className="flex flex-row">
-                <div className="w-5/6">
+                <div className="w-4/6">
                   <CardTitle className="pb-1">{task.title}</CardTitle>
                   <CardDescription className="mt-1 break-words">{task.text}</CardDescription>
                   <CardDescription className="text-gray-400 mt-5">
@@ -73,16 +73,16 @@ export default function MappedCards({ notDone, setNotDone, done, setDone }) {
                     {task.time}
                   </CardDescription>
                 </div>
-                <div className="ml-auto flex flex-col justify-between invisible group-hover:visible">
-                  <Button variant="outline" size="icon" onClick={() => deleteTask(task.id)}>
-                    <Trash2 className="h-[1.2rem] w-[1.2rem]" />
-                  </Button>
-                  <Button variant="outline" size="icon" onClick={() => completeTask(task.id)}>
-                    <CircleCheckBig className="h-[1.2rem] w-[1.2rem]" />
-                  </Button>
-                </div>
               </CardHeader>
             </Card>
+            <div className="flex flex-row justify-evenly items-center h-full w-[340px] sm:w-[380px] absolute top-0 bg-zinc-900/50 rounded-lg invisible group-hover:visible">
+              <Button variant="outline" size="icon" onClick={() => deleteTask(task.id)}>
+                <Trash2 className="h-[1.2rem] w-[1.2rem]" />
+              </Button>
+              <Button variant="outline" size="icon" onClick={() => completeTask(task.id)}>
+                <CircleCheckBig className="h-[1.2rem] w-[1.2rem]" />
+              </Button>
+            </div>
           </div>
         ))}
       </div>
@@ -91,8 +91,8 @@ export default function MappedCards({ notDone, setNotDone, done, setDone }) {
           <h2 className="font-bold text-lg">Complete</h2>
         </div>
         {done.map((task, id) => (
-          <div key={id} className="w-96 m-4 flex justify-center">
-            <Card className="group bg-green-300 w-[340px] sm:w-[380px]">
+          <div key={id} className="w-96 m-4 flex justify-center group relative">
+            <Card className="bg-green-300 w-[340px] sm:w-[380px] group-hover:blur-sm">
               <CardHeader className="flex flex-row">
                 <div className="w-5/6">
                   <CardTitle className="truncate pb-1">{task.title}</CardTitle>
@@ -101,13 +101,13 @@ export default function MappedCards({ notDone, setNotDone, done, setDone }) {
                     <CircleCheckBig className="mr-2 size-4" /> completed {task.date} {task.time}
                   </CardDescription>
                 </div>
-                <div className="ml-auto flex flex-col justify-center invisible group-hover:visible">
-                  <Button variant="outline" size="icon" onClick={() => deleteTask(task.id)}>
-                    <Trash2 className="h-[1.2rem] w-[1.2rem]" />
-                  </Button>
-                </div>
               </CardHeader>
             </Card>
+            <div className="flex flex-row justify-evenly items-center h-full w-[340px] sm:w-[380px] absolute top-0 bg-zinc-900/50 rounded-lg invisible group-hover:visible">
+              <Button variant="outline" size="icon" onClick={() => deleteTask(task.id)}>
+                <Trash2 className="h-[1.2rem] w-[1.2rem]" />
+              </Button>
+            </div>
           </div>
         ))}
       </div>
