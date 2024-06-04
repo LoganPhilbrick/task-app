@@ -4,7 +4,7 @@ import { Card, CardHeader } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { useState, useRef } from "react";
 
-export default function FormCard({ setTasks }) {
+export default function FormCard({ setNotDone }) {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
 
@@ -24,9 +24,8 @@ export default function FormCard({ setTasks }) {
         })
     );
     const updatedTasks = await res.json();
-    setTasks(updatedTasks);
+    setNotDone(updatedTasks);
     formRef.current.reset();
-    // console.log(updatedTasks);
   };
 
   const handleTitleChange = (event) => {

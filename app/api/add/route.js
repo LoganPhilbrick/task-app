@@ -16,11 +16,11 @@ export async function GET(request) {
 
   try {
     if (!title || !text) throw new Error("Title and description required");
-    await sql`INSERT INTO tasks (title, text, id, userid, date, time) VALUES ( ${title}, ${text}, ${id}, ${userId}, ${date}, ${time});`;
+    await sql`INSERT INTO tasks (title, text, id, userid, date, time, completed) VALUES ( ${title}, ${text}, ${id}, ${userId}, ${date}, ${time}, false);`;
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });
   }
 
-  const tasks = await sql`SELECT * FROM tasks WHERE userid = ${userId}`;
+  const tasks = await sql`SELECT * FROM tasks WHERE userid = ${userId} AND completed = false`;
   return NextResponse.json(tasks.rows, { status: 200 });
 }

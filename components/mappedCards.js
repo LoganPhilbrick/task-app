@@ -5,7 +5,14 @@ import { Button } from "./ui/button";
 import { Trash2, CircleCheckBig } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-export default function MappedCards({ tasks, setTasks, done }) {
+export default function MappedCards({ notDone, setNotDone, done, setDone }) {
+  function returnDone(task) {
+    return task.completed == true;
+  }
+  function returnNotDone(task) {
+    return task.completed == false;
+  }
+
   const deleteTask = async (id) => {
     if (id) {
       const res = await fetch(
@@ -14,19 +21,22 @@ export default function MappedCards({ tasks, setTasks, done }) {
             id: id,
           })
       );
-      const updatedTasks = await res.json();
-      setTasks(updatedTasks);
-      // console.log(updatedTasks);
+      const data = await res.json();
+
+      const done = data.filter(returnDone);
+      setDone(done);
+      const notDone = data.filter(returnNotDone);
+      setNotDone(notDone);
     }
   };
 
-  if (!tasks) {
+  if (!notDone) {
     return <div>Loading...</div>;
   }
   return (
     <div className="flex">
       <div>
-        {tasks.map((task, id) => (
+        {notDone.map((task, id) => (
           <div key={id} className="w-96 m-4">
             <Card className="group">
               <CardHeader className="flex flex-row">

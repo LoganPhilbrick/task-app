@@ -5,30 +5,37 @@ import FormCard from "@/components/formCard";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [tasks, setTasks] = useState(null);
-  const completedTasks = [
-    { title: "Tasks title is too long to fit on single line", text: "Text for the task goes here and describes the task hhhhhhhhhhhhh.", date: "06/26/2024 11:50 pm" },
-    { title: "Tasks title", text: "Describes the task.", date: "06/26/2024 11:50 pm" },
-  ];
+  const [notDone, setNotDone] = useState(null);
+  const [done, setDone] = useState(null);
+
+  function returnDone(task) {
+    return task.completed == true;
+  }
+  function returnNotDone(task) {
+    return task.completed == false;
+  }
 
   useEffect(() => {
-    if (tasks === null) {
+    if (notDone === null) {
       fetch("api/get")
         .then((res) => res.json())
         .then((data) => {
-          setTasks(data);
+          const done = data.filter(returnDone);
+          setDone(done);
+          const notDone = data.filter(returnNotDone);
+          setNotDone(notDone);
         });
     }
-  }, [tasks]);
+  }, [notDone]);
 
-  if (!tasks) {
+  if (!notDone) {
     return <div>Loading...</div>;
   }
   return (
     <main className="flex flex-col items-center">
       <div>
-        <FormCard setTasks={setTasks} />
-        <MappedCards tasks={tasks} setTasks={setTasks} done={completedTasks} />
+        <FormCard setNotDone={setNotDone} setDone={setDone} />
+        <MappedCards notDone={notDone} setNotDone={setNotDone} done={done} setDone={setDone} />
       </div>
     </main>
   );
