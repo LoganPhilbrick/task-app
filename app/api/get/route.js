@@ -6,6 +6,7 @@ export const fetchCache = "force-no-store";
 
 export async function GET(request) {
   const { userId } = auth();
+
   const tasks = await sql`SELECT * FROM tasks WHERE userid = ${userId}`;
   return NextResponse.json(tasks.rows);
 }
