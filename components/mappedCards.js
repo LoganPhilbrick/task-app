@@ -86,7 +86,7 @@ export default function MappedCards({ notDone, setNotDone, done, setDone }) {
           </div>
         ))}
       </div>
-      <div className="">
+      <div className="mb-6">
         <div className="flex justify-center w-96 mx-4">
           <h2 className="font-bold text-lg">Complete</h2>
         </div>
