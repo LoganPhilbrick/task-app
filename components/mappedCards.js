@@ -31,11 +31,16 @@ export default function MappedCards({ notDone, setNotDone, done, setDone }) {
   };
 
   const completeTask = async (id) => {
+    const date = new Date().toLocaleDateString();
+    const time = new Date().toLocaleTimeString();
+
     if (id) {
       const res = await fetch(
         "api/complete?" +
           new URLSearchParams({
             id: id,
+            date: date,
+            time: time,
           })
       );
       const data = await res.json();
@@ -88,12 +93,11 @@ export default function MappedCards({ notDone, setNotDone, done, setDone }) {
           <div key={id} className="m-4 w-96">
             <Card className="group bg-green-300">
               <CardHeader className="flex flex-row">
-                {/* ^^ style={{ filter: "blur(1px)" }} ^^ */}
                 <div className="w-5/6">
                   <CardTitle className="truncate pb-1">{task.title}</CardTitle>
                   <CardDescription className="mt-1 truncate">{task.text}</CardDescription>
-                  <CardDescription className="text-gray-400 mt-5">
-                    created {task.date} {task.time}
+                  <CardDescription className="text-gray-400 mt-5 flex items-center">
+                    <CircleCheckBig className="mr-2 size-4" /> completed {task.date} {task.time}
                   </CardDescription>
                 </div>
                 <div className="ml-auto flex flex-col justify-center invisible group-hover:visible">

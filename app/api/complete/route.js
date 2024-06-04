@@ -7,10 +7,12 @@ export const fetchCache = "force-no-store";
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const id = searchParams.get("id");
+  const date = searchParams.get("date");
+  const time = searchParams.get("time");
   const { userId } = auth();
 
   try {
-    await sql`UPDATE tasks SET completed = true WHERE id = ${id}`;
+    await sql`UPDATE tasks SET completed = true, date = ${date}, time =${time} WHERE id = ${id}`;
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });
   }
