@@ -16,7 +16,7 @@ export default function Home() {
   }
 
   useEffect(() => {
-    if (notDone === null) {
+    if (!notDone || !done) {
       fetch("api/get")
         .then((res) => res.json())
         .then((data) => {
@@ -26,7 +26,7 @@ export default function Home() {
           setNotDone(notDone);
         });
     }
-  }, [notDone]);
+  }, [done, notDone]);
 
   if (!done || !notDone) {
     <div className="flex justify-center items-center">
